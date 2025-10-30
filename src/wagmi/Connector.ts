@@ -71,6 +71,7 @@ export function porto<
 
     return {
       async connect({ chainId = chains[0].id, ...rest } = {}) {
+        console.log('connecting to porto submodule...')
         const isReconnecting =
           ('isReconnecting' in rest && rest.isReconnecting) || false
         const withCapabilities =
