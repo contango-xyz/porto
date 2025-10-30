@@ -18,7 +18,7 @@ import './styles.css'
 
 if (import.meta.env.PROD) {
   Sentry.init({
-    dsn: 'https://457697aad11614a3f667c8e61f6b9e20@o4509056062849024.ingest.us.sentry.io/4509080285741056',
+    dsn: 'https://c04dc4ecd712637cdee058c3ed5a8e38@o4510278604750848.ingest.de.sentry.io/4510278654623824',
     enabled: document.referrer
       ? TrustedHosts.hostnames.includes(new URL(document.referrer).hostname)
       : true,

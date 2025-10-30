@@ -9,7 +9,7 @@ import './styles.css'
 
 if (import.meta.env.PROD) {
   Sentry.init({
-    dsn: 'https://1b4e28921c688e2b03d1b63f8d018913@o4509056062849024.ingest.us.sentry.io/4509080371724288',
+    dsn: 'https://1f20c57484e76e7209759331dcf20210@o4510278604750848.ingest.de.sentry.io/4510278606651472',
     environment: Env.get(),
     integrations: [
       Sentry.replayIntegration(),

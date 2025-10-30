@@ -39,7 +39,7 @@ export default defineConfig(({ mode }) => {
     SentryVitePlugin({
       authToken: process.env.SENTRY_AUTH_TOKEN,
       disable: process.env.VERCEL_ENV !== 'production',
-      org: 'ithaca',
+      org: 'contango-protocol-ltd',
       project: 'porto-dialog',
     }),
   ]
