@@ -3,10 +3,10 @@ RELAY_PRIVATE_KEY=0x2a871d0798f97d79848a013d4936a73bf4cc922c825d33c1cf7073dff6d4
 RPC_URL=http://localhost:8545
 
 # Check if state already exists.
-if [ -f /app/shared/anvil.json ]; then
-  echo "State already initialized, skipping..."
-  exit 0
-fi
+# if [ -f /app/shared/anvil.json ]; then
+#   echo "State already initialized, skipping..."
+#   exit 0
+# fi
 
 anvil --hardfork osaka --host 0.0.0.0 --port 8545 --accounts 20 --dump-state /app/shared/anvil.json &
 
@@ -25,7 +25,7 @@ ACCOUNT_PROXY_ADDRESS=$(forge create EIP7702Proxy --config-path ./account/foundr
 echo "EIP7702Proxy deployed to: $ACCOUNT_PROXY_ADDRESS"
 SIMULATOR_ADDRESS=$(forge create Simulator --config-path ./account/foundry.toml --json --broadcast --rpc-url $RPC_URL --private-key $RELAY_PRIVATE_KEY | jq -r '.deployedTo')
 echo "Simulator deployed to: $SIMULATOR_ADDRESS"
-FUNDER_ADDRESS=$(forge create SimpleFunder --config-path ./account/foundry.toml --json --broadcast --rpc-url $RPC_URL --private-key $RELAY_PRIVATE_KEY --constructor-args $RELAY_ADDRESS $ORCHESTRATOR_ADDRESS $RELAY_ADDRESS | jq -r '.deployedTo')
+FUNDER_ADDRESS=$(forge create SimpleFunder --config-path ./account/foundry.toml --json --broadcast --rpc-url $RPC_URL --private-key $RELAY_PRIVATE_KEY --constructor-args $RELAY_ADDRESS $RELAY_ADDRESS | jq -r '.deployedTo')
 echo "Funder deployed to: $FUNDER_ADDRESS"
 ESCROW_ADDRESS=$(forge create Escrow --config-path ./account/foundry.toml --json --broadcast --rpc-url $RPC_URL --private-key $RELAY_PRIVATE_KEY | jq -r '.deployedTo')
 echo "Escrow deployed to: $ESCROW_ADDRESS"

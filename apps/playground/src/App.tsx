@@ -1396,9 +1396,13 @@ function SendTransaction() {
 
         const params = (() => {
           if (action === 'mint') {
+            console.log('here mint')
             const token = exp1Address[chainId as never]
+            console.log('here token', token)
             if (!token)
               throw new Error(`exp1 address not defined for chainId ${chainId}`)
+
+            console.log('here account', account)
 
             const recipient =
               account || '0x0000000000000000000000000000000000000001'
