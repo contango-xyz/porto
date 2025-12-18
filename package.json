@@ -292,6 +292,11 @@
       "types": "./dist/core/Messenger.d.ts",
       "default": "./dist/core/Messenger.js"
     },
+    "./core/Mode.metro": {
+      "src": "./src/core/Mode.metro.ts",
+      "types": "./dist/core/Mode.metro.d.ts",
+      "default": "./dist/core/Mode.metro.js"
+    },
     "./core/Mode": {
       "src": "./src/core/Mode.ts",
       "types": "./dist/core/Mode.d.ts",

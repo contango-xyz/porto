@@ -20,11 +20,24 @@ import type * as Porto from '../porto.js'
 import type * as Token from '../schema/token.js'
 import * as Siwe from '../siwe.js'
 import * as U from '../utils.js'
-import { relay } from './relay.js'
+
+const createStubFallback = (): Mode.Mode => {
+  const throwNotAvailable = (): never => {
+    throw new Error("Relay mode fallback is not available in this environment.")
+  }
+  return {
+    actions: new Proxy({} as Mode.Mode["actions"], {
+      get: () => throwNotAvailable,
+    }),
+    config: undefined as Mode.Mode["config"],
+    name: "stub",
+    setup: () => () => {},
+  }
+}
 
 export function dialog(parameters: dialog.Parameters = {}) {
   const {
-    fallback = relay(),
+    fallback = createStubFallback(),
     features,
     host = Dialog.hostUrls.prod,
     labels,
