@@ -256,235 +256,235 @@
   "module": "./dist/index.js",
   "exports": {
     ".": {
-      "src": "./src/index.ts",
+      "src": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "react-native": "./dist/index.native.js",
       "browser": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./cli": {
-      "src": "./src/cli/index.ts",
+      "src": "./dist/cli/index.js",
       "types": "./dist/cli/index.d.ts",
       "default": "./dist/cli/index.js"
     },
     "./cli/Dialog": {
-      "src": "./src/cli/Dialog.ts",
+      "src": "./dist/cli/Dialog.js",
       "types": "./dist/cli/Dialog.d.ts",
       "default": "./dist/cli/Dialog.js"
     },
     "./cli/Messenger": {
-      "src": "./src/cli/Messenger.ts",
+      "src": "./dist/cli/Messenger.js",
       "types": "./dist/cli/Messenger.d.ts",
       "default": "./dist/cli/Messenger.js"
     },
     "./core/Chains": {
-      "src": "./src/core/Chains.ts",
+      "src": "./dist/core/Chains.js",
       "types": "./dist/core/Chains.d.ts",
       "default": "./dist/core/Chains.js"
     },
     "./core/Dialog": {
-      "src": "./src/core/Dialog.ts",
+      "src": "./dist/core/Dialog.js",
       "types": "./dist/core/Dialog.d.ts",
       "default": "./dist/core/Dialog.js"
     },
     "./core/Messenger": {
-      "src": "./src/core/Messenger.ts",
+      "src": "./dist/core/Messenger.js",
       "types": "./dist/core/Messenger.d.ts",
       "default": "./dist/core/Messenger.js"
     },
     "./core/Mode.metro": {
-      "src": "./src/core/Mode.metro.ts",
+      "src": "./dist/core/Mode.metro.js",
       "types": "./dist/core/Mode.metro.d.ts",
       "default": "./dist/core/Mode.metro.js"
     },
     "./core/Mode": {
-      "src": "./src/core/Mode.ts",
+      "src": "./dist/core/Mode.js",
       "types": "./dist/core/Mode.d.ts",
       "default": "./dist/core/Mode.js"
     },
     "./core/Porto": {
-      "src": "./src/core/Porto.ts",
+      "src": "./dist/core/Porto.js",
       "types": "./dist/core/Porto.d.ts",
       "default": "./dist/core/Porto.js"
     },
     "./core/RpcSchema": {
-      "src": "./src/core/RpcSchema.ts",
+      "src": "./dist/core/RpcSchema.js",
       "types": "./dist/core/RpcSchema.d.ts",
       "default": "./dist/core/RpcSchema.js"
     },
     "./core/Storage": {
-      "src": "./src/core/Storage.ts",
+      "src": "./dist/core/Storage.js",
       "types": "./dist/core/Storage.d.ts",
       "default": "./dist/core/Storage.js"
     },
     "./core/Transport": {
-      "src": "./src/core/Transport.ts",
+      "src": "./dist/core/Transport.js",
       "types": "./dist/core/Transport.d.ts",
       "default": "./dist/core/Transport.js"
     },
     "./internal": {
-      "src": "./src/internal/index.ts",
+      "src": "./dist/internal/index.js",
       "types": "./dist/internal/index.d.ts",
       "default": "./dist/internal/index.js"
     },
     "./react-native": {
-      "src": "./src/react-native/index.ts",
+      "src": "./dist/react-native/index.js",
       "types": "./dist/react-native/index.d.ts",
       "default": "./dist/react-native/index.js"
     },
     "./react-native/crypto": {
-      "src": "./src/react-native/crypto.ts",
+      "src": "./dist/react-native/crypto.js",
       "types": "./dist/react-native/crypto.d.ts",
       "default": "./dist/react-native/crypto.js"
     },
     "./react-native/register": {
-      "src": "./src/react-native/register.ts",
+      "src": "./dist/react-native/register.js",
       "types": "./dist/react-native/register.d.ts",
       "default": "./dist/react-native/register.js"
     },
     "./register": {
-      "src": "./src/register/index.ts",
+      "src": "./dist/register/index.js",
       "types": "./dist/register/index.d.ts",
       "default": "./dist/register/index.js"
     },
     "./remote": {
-      "src": "./src/remote/index.ts",
+      "src": "./dist/remote/index.js",
       "types": "./dist/remote/index.d.ts",
       "default": "./dist/remote/index.js"
     },
     "./remote/Actions": {
-      "src": "./src/remote/Actions.ts",
+      "src": "./dist/remote/Actions.js",
       "types": "./dist/remote/Actions.d.ts",
       "default": "./dist/remote/Actions.js"
     },
     "./remote/Events": {
-      "src": "./src/remote/Events.ts",
+      "src": "./dist/remote/Events.js",
       "types": "./dist/remote/Events.d.ts",
       "default": "./dist/remote/Events.js"
     },
     "./remote/Hooks": {
-      "src": "./src/remote/Hooks.ts",
+      "src": "./dist/remote/Hooks.js",
       "types": "./dist/remote/Hooks.d.ts",
       "default": "./dist/remote/Hooks.js"
     },
     "./remote/Porto": {
-      "src": "./src/remote/Porto.ts",
+      "src": "./dist/remote/Porto.js",
       "types": "./dist/remote/Porto.d.ts",
       "default": "./dist/remote/Porto.js"
     },
     "./server": {
-      "src": "./src/server/index.ts",
+      "src": "./dist/server/index.js",
       "types": "./dist/server/index.d.ts",
       "default": "./dist/server/index.js"
     },
     "./server/Route": {
-      "src": "./src/server/Route.ts",
+      "src": "./dist/server/Route.js",
       "types": "./dist/server/Route.d.ts",
       "default": "./dist/server/Route.js"
     },
     "./server/Router": {
-      "src": "./src/server/Router.ts",
+      "src": "./dist/server/Router.js",
       "types": "./dist/server/Router.d.ts",
       "default": "./dist/server/Router.js"
     },
     "./theme": {
-      "src": "./src/theme/index.ts",
+      "src": "./dist/theme/index.js",
       "types": "./dist/theme/index.d.ts",
       "default": "./dist/theme/index.js"
     },
     "./theme/Theme": {
-      "src": "./src/theme/Theme.ts",
+      "src": "./dist/theme/Theme.js",
       "types": "./dist/theme/Theme.d.ts",
       "default": "./dist/theme/Theme.js"
     },
     "./trusted-hosts": {
-      "src": "./src/trusted-hosts.ts",
+      "src": "./dist/trusted-hosts.js",
       "types": "./dist/trusted-hosts.d.ts",
       "default": "./dist/trusted-hosts.js"
     },
     "./viem": {
-      "src": "./src/viem/index.ts",
+      "src": "./dist/viem/index.js",
       "types": "./dist/viem/index.d.ts",
       "default": "./dist/viem/index.js"
     },
     "./viem/Account": {
-      "src": "./src/viem/Account.ts",
+      "src": "./dist/viem/Account.js",
       "types": "./dist/viem/Account.d.ts",
       "default": "./dist/viem/Account.js"
     },
     "./viem/AccountActions": {
-      "src": "./src/viem/AccountActions.ts",
+      "src": "./dist/viem/AccountActions.js",
       "types": "./dist/viem/AccountActions.d.ts",
       "default": "./dist/viem/AccountActions.js"
     },
     "./viem/CapabilitiesSchema": {
-      "src": "./src/viem/CapabilitiesSchema.ts",
+      "src": "./dist/viem/CapabilitiesSchema.js",
       "types": "./dist/viem/CapabilitiesSchema.d.ts",
       "default": "./dist/viem/CapabilitiesSchema.js"
     },
     "./viem/ContractActions": {
-      "src": "./src/viem/ContractActions.ts",
+      "src": "./dist/viem/ContractActions.js",
       "types": "./dist/viem/ContractActions.d.ts",
       "default": "./dist/viem/ContractActions.js"
     },
     "./viem/Key": {
-      "src": "./src/viem/Key.ts",
+      "src": "./dist/viem/Key.js",
       "types": "./dist/viem/Key.d.ts",
       "default": "./dist/viem/Key.js"
     },
     "./viem/RelayActions": {
-      "src": "./src/viem/RelayActions.ts",
+      "src": "./dist/viem/RelayActions.js",
       "types": "./dist/viem/RelayActions.d.ts",
       "default": "./dist/viem/RelayActions.js"
     },
     "./viem/RelayClient": {
-      "src": "./src/viem/RelayClient.ts",
+      "src": "./dist/viem/RelayClient.js",
       "types": "./dist/viem/RelayClient.d.ts",
       "default": "./dist/viem/RelayClient.js"
     },
     "./viem/RpcSchema": {
-      "src": "./src/viem/RpcSchema.ts",
+      "src": "./dist/viem/RpcSchema.js",
       "types": "./dist/viem/RpcSchema.d.ts",
       "default": "./dist/viem/RpcSchema.js"
     },
     "./viem/WalletActions": {
-      "src": "./src/viem/WalletActions.ts",
+      "src": "./dist/viem/WalletActions.js",
       "types": "./dist/viem/WalletActions.d.ts",
       "default": "./dist/viem/WalletActions.js"
     },
     "./viem/WalletClient": {
-      "src": "./src/viem/WalletClient.ts",
+      "src": "./dist/viem/WalletClient.js",
       "types": "./dist/viem/WalletClient.d.ts",
       "default": "./dist/viem/WalletClient.js"
     },
     "./wagmi": {
-      "src": "./src/wagmi/index.ts",
+      "src": "./dist/wagmi/index.js",
       "types": "./dist/wagmi/index.d.ts",
       "react-native": "./dist/wagmi/index.native.js",
       "browser": "./dist/wagmi/index.js",
       "default": "./dist/wagmi/index.js"
     },
     "./wagmi/Actions": {
-      "src": "./src/wagmi/Actions.ts",
+      "src": "./dist/wagmi/Actions.js",
       "types": "./dist/wagmi/Actions.d.ts",
       "react-native": "./dist/wagmi/Actions.native.js",
       "browser": "./dist/wagmi/Actions.js",
       "default": "./dist/wagmi/Actions.js"
     },
     "./wagmi/Connector": {
-      "src": "./src/wagmi/Connector.ts",
+      "src": "./dist/wagmi/Connector.js",
       "types": "./dist/wagmi/Connector.d.ts",
       "default": "./dist/wagmi/Connector.js"
     },
     "./wagmi/Hooks": {
-      "src": "./src/wagmi/Hooks.ts",
+      "src": "./dist/wagmi/Hooks.js",
       "types": "./dist/wagmi/Hooks.d.ts",
       "react-native": "./dist/wagmi/Hooks.native.js",
       "browser": "./dist/wagmi/Hooks.js",
       "default": "./dist/wagmi/Hooks.js"
     },
     "./wagmi/Query": {
-      "src": "./src/wagmi/Query.ts",
+      "src": "./dist/wagmi/Query.js",
       "types": "./dist/wagmi/Query.d.ts",
       "default": "./dist/wagmi/Query.js"
     }

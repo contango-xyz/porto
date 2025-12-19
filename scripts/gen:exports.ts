@@ -62,9 +62,12 @@ const registerFile = (relativePath: string) => {
 
   const entry = ensureEntry(key)
 
-  const srcPath = `./src/${posixPath}`
   const distPath = `./dist/${posixPath.replace(/\.(tsx?|jsx?)$/, '.js')}`
   const typesPath = `./dist/${posixPath.replace(/\.(tsx?|jsx?)$/, '.d.ts')}`
+  // NOTE: We intentionally point `src` to the built JS entrypoint (dist) to
+  // avoid Metro resolving workspace packages to TS sources (which use `.js`
+  // specifiers that don't exist in `src/`).
+  const srcPath = distPath
 
   if (isNative) {
     entry.conditions['react-native'] = distPath
