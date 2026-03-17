@@ -325,6 +325,7 @@ export function relay(parameters: relay.Parameters = {}) {
         const signature = await Key.sign(adminKey, {
           address: null,
           payload: digest,
+          webAuthn: webAuthn,
         })
         await RelayActions.sendPreparedCalls(client, {
           context,
@@ -461,6 +462,7 @@ export function relay(parameters: relay.Parameters = {}) {
           return await Key.sign(adminKey, {
             address: account.address,
             payload: digest,
+            webAuthn: webAuthn,
           })
         })()
 
@@ -474,6 +476,7 @@ export function relay(parameters: relay.Parameters = {}) {
           const signature = await Key.sign(adminKey, {
             address: null,
             payload: digest,
+            webAuthn: webAuthn,
           })
           await RelayActions.sendPreparedCalls(client, {
             context,
@@ -504,6 +507,7 @@ export function relay(parameters: relay.Parameters = {}) {
             const signature = await Account.sign(account, {
               payload: PersonalMessage.getSignPayload(Hex.fromString(message)),
               role: 'admin',
+              webAuthn: webAuthn,
             })
             const signature_erc8010 = await Erc8010.wrap(client, {
               address: account.address,
