@@ -1040,13 +1040,15 @@ export function requiresConfirmation(
 
 export function getReferrer() {
   const icon = (() => {
-    const dark = document.querySelector(
-      'link[rel="icon"][media="(prefers-color-scheme: dark)"]',
-    )?.href
+    const getHref = (selector: string) => {
+      const element = document.querySelector(selector)
+      if (element instanceof HTMLLinkElement) return element.href
+      return undefined
+    }
+    const dark = getHref('link[rel="icon"][media="(prefers-color-scheme: dark)"]')
     const light =
-      document.querySelector(
-        'link[rel="icon"][media="(prefers-color-scheme: light)"]',
-      )?.href ?? document.querySelector('link[rel="icon"]')?.href
+      getHref('link[rel="icon"][media="(prefers-color-scheme: light)"]') ??
+      getHref('link[rel="icon"]')
     if (dark && light && dark !== light) return { dark, light }
     const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     if (isDark) return dark
