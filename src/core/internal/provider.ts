@@ -1195,7 +1195,7 @@ export function from<
   }
   const destroy = setup()
 
-  return Object.assign(provider, {
+  return Object.assign(provider as unknown as Provider, {
     _internal: {
       destroy,
     },
