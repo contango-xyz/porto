@@ -6,11 +6,11 @@ import type { OneOf } from '../types.js'
 
 export const address = () =>
   z.templateLiteral(['0x', z.string()], {
-    message: 'Needs string in format ^0x[A-Fa-f0-9]{40}$.',
+    error: 'Needs string in format ^0x[A-Fa-f0-9]{40}$.',
   })
 export const hex = () =>
   z.templateLiteral(['0x', z.string()], {
-    message: 'Needs string in format ^0x[A-Fa-f0-9]+$.',
+    error: 'Needs string in format ^0x[A-Fa-f0-9]+$.',
   })
 export const number = () =>
   z.codec(hex(), z.number(), {
@@ -18,7 +18,7 @@ export const number = () =>
     encode: (value) => Hex_ox.fromNumber(value),
   })
 export const bigint = () =>
-  z.codec(hex(), z.bigint({ message: 'Required bigint' }), {
+  z.codec(hex(), z.bigint({ error: 'Required bigint' }), {
     decode: (value) => Hex_ox.toBigInt(value),
     encode: (value) => Hex_ox.fromNumber(value),
   })
