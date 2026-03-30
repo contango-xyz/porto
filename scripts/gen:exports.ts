@@ -63,17 +63,19 @@ const registerFile = (relativePath: string) => {
   const entry = ensureEntry(key)
 
   const srcPath = `./src/${posixPath}`
+  const distPath = `./dist/${posixPath.replace(/\.(tsx?|jsx?)$/, '.js')}`
+  const typesPath = `./dist/${posixPath.replace(/\.(tsx?|jsx?)$/, '.d.ts')}`
 
   if (isNative) {
-    entry.conditions['react-native'] = srcPath
-    entry.conditions.browser = srcPath.replace('.native', '')
+    entry.conditions['react-native'] = distPath
+    entry.conditions.browser = distPath.replace('.native', '')
     if (!entry.src) entry.src = srcPath
-    if (!entry.types) entry.types = srcPath
-    if (!entry.default) entry.default = srcPath
+    if (!entry.types) entry.types = typesPath
+    if (!entry.default) entry.default = distPath
   } else {
     entry.src = srcPath
-    entry.types = srcPath
-    entry.default = srcPath
+    entry.types = typesPath
+    entry.default = distPath
   }
 }
 
