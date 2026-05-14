@@ -30,7 +30,7 @@
     "format": "biome format --write",
     "gen:chains": "tsx ./scripts/chains.ts",
     "gen:exports": "tsx ./scripts/gen:exports.ts",
-    "postinstall": "git submodule update --init --recursive && pnpm preconstruct",
+    "postinstall": "echo 'porto fork: postinstall stripped — for solidity work run `git submodule update --init --recursive` + `pnpm build:contracts`; for dev workflows run `pnpm preconstruct`'",
     "preconstruct": "pnpm gen:exports && zile dev --project ./tsconfig.build.json",
     "preinstall": "pnpx only-allow pnpm",
     "prepare": "pnpm simple-git-hooks",
