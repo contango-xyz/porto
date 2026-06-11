@@ -201,6 +201,7 @@ export async function prepareCalls<
     preCalls,
     requiredFunds,
     revokeKeys,
+    useGasTank,
   } = parameters
 
   const account_ = account ? Account.from(account) : undefined
@@ -251,6 +252,7 @@ export async function prepareCalls<
         feePayer,
         feeToken,
         nonce,
+        useGasTank,
       },
       preCall,
       preCalls: signedPreCalls,
