@@ -881,6 +881,30 @@ describe('Signed', () => {
     `)
   })
 
+  const bridgeMeta = { opaque: { adapter: 'across', route: [1, 2], note: 'x' } }
+  const signedWireWithBridgeMeta = {
+    quotes: [{ ...validSignedData.quotes[0], bridgeMeta }],
+    ttl: 1,
+    hash: '0x00000000000000000000000000000000000000000000000000000000000000aa',
+    r: '0x00000000000000000000000000000000000000000000000000000000000000bb',
+    s: '0x00000000000000000000000000000000000000000000000000000000000000cc',
+  }
+
+  test('behavior: decode preserves unknown bridgeMeta on a quote', () => {
+    const decoded = z.decode(Quotes.Signed, signedWireWithBridgeMeta)
+    expect(
+      (decoded.quotes[0] as Record<string, unknown>).bridgeMeta, // bridgeMeta is an unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
+  test('behavior: decode -> encode round-trips bridgeMeta verbatim', () => {
+    const decoded = z.decode(Quotes.Signed, signedWireWithBridgeMeta)
+    const encoded = z.encode(Quotes.Signed, decoded)
+    expect(
+      (encoded.quotes[0] as Record<string, unknown>).bridgeMeta, // bridgeMeta is an unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
   test('misc: signed quotes contains all quotes fields plus signature fields', () => {
     const signedDecoded = z.parse(Quotes.Signed, validSignedData)
     const { hash, r, s, v, yParity, ...quotesOnlyData } = validSignedData

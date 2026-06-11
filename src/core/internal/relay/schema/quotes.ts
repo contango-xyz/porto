@@ -26,8 +26,11 @@ export const AssetDeficit = z.object({
 })
 export type AssetDeficit = z.infer<typeof AssetDeficit>
 
+// looseObject (not object): the relay may include opaque extension fields (e.g. bridgeMeta) on a
+// quote that MUST survive decode->encode for the signed-quote digest to verify on
+// wallet_sendPreparedCalls. Do not narrow back to z.object.
 /** A quote from the RPC for a given `Intent`. */
-export const Quote = z.object({
+export const Quote = z.looseObject({
   /** An optional additional authorization address, which would be used to delegate the feepayer */
   additionalAuthorization: z.nullish(
     z.object({
@@ -72,7 +75,7 @@ export const Quote = z.object({
 })
 export type Quote = z.infer<typeof Quote>
 
-export const Quotes = z.object({
+export const Quotes = z.looseObject({
   /** Merkle root if it's a multichain workflow. */
   multiChainRoot: z.optional(z.union([u.hex(), z.null()])),
   /**
@@ -87,7 +90,7 @@ export const Quotes = z.object({
   ttl: z.number(),
 })
 
-export const Signed = z.object({
+export const Signed = z.looseObject({
   ...Quotes.shape,
   hash: u.hex(),
   r: u.hex(),
