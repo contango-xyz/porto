@@ -462,7 +462,11 @@ describe('meta', () => {
 
     test('behavior: decodes useGasTank from the wire', () => {
       const decoded = z.decode(Capabilities.meta.Request, { useGasTank: true })
-      expect(decoded.useGasTank).toBe(true)
+      expect(decoded).toMatchInlineSnapshot(`
+        {
+          "useGasTank": true,
+        }
+      `)
     })
 
     test('misc: encodes request correctly', () => {
