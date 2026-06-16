@@ -218,6 +218,24 @@ describe('Quote', () => {
     },
   )
 
+  const bridgeMeta = { opaque: { adapter: 'across', note: 'x', route: [1, 2] } }
+  const quoteWireWithBridgeMeta = { ...validQuoteData, bridgeMeta }
+
+  test('behavior: decode preserves unknown bridgeMeta', () => {
+    const decoded = z.parse(Quotes.Quote, quoteWireWithBridgeMeta)
+    expect(
+      (decoded as Record<string, unknown>).bridgeMeta, // unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
+  test('behavior: decode -> encode round-trips bridgeMeta verbatim', () => {
+    const decoded = z.parse(Quotes.Quote, quoteWireWithBridgeMeta)
+    const encoded = z.encode(Quotes.Quote, decoded)
+    expect(
+      (encoded as Record<string, unknown>).bridgeMeta, // unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
   test('error: rejects invalid address format for authorizationAddress', () => {
     expect(() =>
       z.parse(Quotes.Quote, {
@@ -517,6 +535,24 @@ describe('Quotes', () => {
     expect(encodedData.ttl).toBe(300)
   })
 
+  const bridgeMeta = { opaque: { adapter: 'across', note: 'x', route: [1, 2] } }
+  const quotesWireWithBridgeMeta = { ...validQuotesData, bridgeMeta }
+
+  test('behavior: decode preserves unknown bridgeMeta', () => {
+    const decoded = z.parse(Quotes.Quotes, quotesWireWithBridgeMeta)
+    expect(
+      (decoded as Record<string, unknown>).bridgeMeta, // unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
+  test('behavior: decode -> encode round-trips bridgeMeta verbatim', () => {
+    const decoded = z.parse(Quotes.Quotes, quotesWireWithBridgeMeta)
+    const encoded = z.encode(Quotes.Quotes, decoded)
+    expect(
+      (encoded as Record<string, unknown>).bridgeMeta, // unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
   test('error: rejects empty quotes array', () => {
     expect(() =>
       z.parse(Quotes.Quotes, {
@@ -736,6 +772,30 @@ describe('Signed', () => {
     expect(result.s).toBe(validSignedData.s)
     expect(result.v).toBe(validSignedData.v)
     expect(result.yParity).toBe(validSignedData.yParity)
+  })
+
+  const bridgeMeta = { opaque: { adapter: 'across', note: 'x', route: [1, 2] } }
+  const signedWireWithBridgeMeta = {
+    hash: '0x00000000000000000000000000000000000000000000000000000000000000aa',
+    quotes: [{ ...validSignedData.quotes[0], bridgeMeta }],
+    r: '0x00000000000000000000000000000000000000000000000000000000000000bb',
+    s: '0x00000000000000000000000000000000000000000000000000000000000000cc',
+    ttl: 1,
+  }
+
+  test('behavior: decode preserves unknown bridgeMeta on a quote', () => {
+    const decoded = z.parse(Quotes.Signed, signedWireWithBridgeMeta)
+    expect(
+      (decoded.quotes[0] as Record<string, unknown>).bridgeMeta, // bridgeMeta is an unknown passthrough field
+    ).toEqual(bridgeMeta)
+  })
+
+  test('behavior: decode -> encode round-trips bridgeMeta verbatim', () => {
+    const decoded = z.parse(Quotes.Signed, signedWireWithBridgeMeta)
+    const encoded = z.encode(Quotes.Signed, decoded)
+    expect(
+      (encoded.quotes[0] as Record<string, unknown>).bridgeMeta, // bridgeMeta is an unknown passthrough field
+    ).toEqual(bridgeMeta)
   })
 
   test('error: rejects invalid hash format', () => {

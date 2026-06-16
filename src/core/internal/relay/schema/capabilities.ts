@@ -115,6 +115,8 @@ export namespace meta {
     feeToken: z.optional(u.address()),
     /** The nonce for the bundle. */
     nonce: z.optional(u.bigint()),
+    /** Pay gas from the off-chain gas tank instead of inside the intent. */
+    useGasTank: z.optional(z.boolean()),
   })
   export type Request = z.infer<typeof Request>
 }

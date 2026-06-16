@@ -404,6 +404,25 @@ describe('meta', () => {
       `)
     })
 
+    test('param: validates useGasTank as boolean when provided', () => {
+      expect(() =>
+        z.parse(Capabilities.meta.Request, {
+          useGasTank: 'not-a-boolean',
+        }),
+      ).toThrowErrorMatchingInlineSnapshot(`
+        [$ZodError: [
+          {
+            "expected": "boolean",
+            "code": "invalid_type",
+            "path": [
+              "useGasTank"
+            ],
+            "message": "Invalid input"
+          }
+        ]]
+      `)
+    })
+
     test('behavior: accepts empty object', () => {
       const request = z.parse(Capabilities.meta.Request, {})
       expect(request).toMatchInlineSnapshot('{}')
@@ -460,6 +479,15 @@ describe('meta', () => {
       expect(request.nonce).toBeUndefined()
     })
 
+    test('behavior: decodes useGasTank from the wire', () => {
+      const decoded = z.decode(Capabilities.meta.Request, { useGasTank: true })
+      expect(decoded).toMatchInlineSnapshot(`
+        {
+          "useGasTank": true,
+        }
+      `)
+    })
+
     test('misc: encodes request correctly', () => {
       const request = {
         feePayer: '0x742d35Cc6634C0532925a3b8D000B4e20200000e',
@@ -473,6 +501,15 @@ describe('meta', () => {
           "feePayer": "0x742d35Cc6634C0532925a3b8D000B4e20200000e",
           "feeToken": "0x1234567890abcdef1234567890abcdef12345678",
           "nonce": "0x1",
+        }
+      `)
+    })
+
+    test('misc: encodes useGasTank onto the wire', () => {
+      const encoded = z.encode(Capabilities.meta.Request, { useGasTank: true })
+      expect(encoded).toMatchInlineSnapshot(`
+        {
+          "useGasTank": true,
         }
       `)
     })
