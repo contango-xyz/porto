@@ -1,6 +1,6 @@
-import { describe, expect, test } from 'vitest'
 import { createClient, custom } from 'viem'
 import { base } from 'viem/chains'
+import { describe, expect, test } from 'vitest'
 import * as Account from './Account.js'
 import * as Key from './Key.js'
 import * as RelayActions from './RelayActions.js'
@@ -12,7 +12,9 @@ const capabilitiesStub = {
   // keyed by hex chainId for base (8453 = 0x2105)
   '0x2105': {
     contracts: {
-      accountImplementation: { address: '0x0000000000000000000000000000000000000001' },
+      accountImplementation: {
+        address: '0x0000000000000000000000000000000000000001',
+      },
       accountProxy: { address: '0x0000000000000000000000000000000000000002' },
       legacyAccountImplementations: [],
       legacyOrchestrators: [],
@@ -28,7 +30,9 @@ const capabilitiesStub = {
 }
 
 describe('prepareCalls', () => {
-  test('behavior: forwards useGasTank into capabilities.meta', async () => {
+  // Drives prepareCalls just far enough to capture the wallet_prepareCalls params,
+  // then aborts (no Relay needed). `params` is spread onto the prepareCalls input.
+  async function captureMeta(params: Record<string, unknown>) {
     let captured: any
     const client = createClient({
       chain: base,
@@ -47,10 +51,10 @@ describe('prepareCalls', () => {
     })
 
     const key = Key.fromSecp256k1({
+      expiry: 0,
       privateKey:
         '0x0000000000000000000000000000000000000000000000000000000000000001',
       role: 'admin',
-      expiry: 0,
     })
     const account = Account.fromPrivateKey(
       '0x0000000000000000000000000000000000000000000000000000000000000001',
@@ -61,10 +65,20 @@ describe('prepareCalls', () => {
       RelayActions.prepareCalls(client, {
         account,
         calls: [],
-        useGasTank: true,
+        ...params,
       } as any),
     ).rejects.toThrow('__captured__')
 
-    expect(captured.capabilities.meta.useGasTank).toBe(true)
+    return captured.capabilities.meta
+  }
+
+  test('behavior: forwards useGasTank into capabilities.meta', async () => {
+    const meta = await captureMeta({ useGasTank: true })
+    expect(meta.useGasTank).toBe(true)
+  })
+
+  test('behavior: omits useGasTank from capabilities.meta when not provided', async () => {
+    const meta = await captureMeta({})
+    expect(meta.useGasTank).toBeUndefined()
   })
 })

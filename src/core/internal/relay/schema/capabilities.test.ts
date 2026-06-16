@@ -404,6 +404,25 @@ describe('meta', () => {
       `)
     })
 
+    test('param: validates useGasTank as boolean when provided', () => {
+      expect(() =>
+        z.parse(Capabilities.meta.Request, {
+          useGasTank: 'not-a-boolean',
+        }),
+      ).toThrowErrorMatchingInlineSnapshot(`
+        [$ZodError: [
+          {
+            "expected": "boolean",
+            "code": "invalid_type",
+            "path": [
+              "useGasTank"
+            ],
+            "message": "Invalid input"
+          }
+        ]]
+      `)
+    })
+
     test('behavior: accepts empty object', () => {
       const request = z.parse(Capabilities.meta.Request, {})
       expect(request).toMatchInlineSnapshot('{}')
