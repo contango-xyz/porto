@@ -132,6 +132,11 @@ export namespace merchantUrl {
   export type Request = z.infer<typeof Request>
 }
 
+export namespace bridgePreference {
+  export const Request = z.union([z.literal('fastest'), z.literal('cheapest')])
+  export type Request = z.infer<typeof Request>
+}
+
 export namespace requiredFunds {
   export const GetCapabilitiesResponse = z.object({
     supported: z.boolean(),

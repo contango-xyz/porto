@@ -574,6 +574,8 @@ export namespace wallet_prepareCalls {
     preCall: z.optional(z.boolean()),
     /** Optional preCalls to execute before signature verification. */
     preCalls: z.optional(z.readonly(z.array(PreCall.PreCall))),
+    /** Preferred bridge selection when sourcing required funds cross-chain. */
+    bridgePreference: z.optional(c.bridgePreference.Request),
     /** Required funds on the target chain. */
     requiredFunds: z.optional(c.requiredFunds.Request),
     /** Keys to revoke on the account. */

@@ -561,11 +561,13 @@ export function relay(parameters: relay.Parameters = {}) {
         const { capabilities, context, digest, typedData } =
           await RelayActions.prepareCalls(client, {
             account,
+            bridgePreference: parameters.bridgePreference,
             calls,
             feeToken: feeToken?.address,
             key,
             merchantUrl,
             requiredFunds: multichain ? requiredFunds : undefined,
+            useGasTank: parameters.useGasTank,
           })
 
         const quotes = context.quote?.quotes ?? []
@@ -741,11 +743,13 @@ export function relay(parameters: relay.Parameters = {}) {
         // fall back to an admin key).
         const result = await RelayActions.sendCalls(client, {
           account,
+          bridgePreference: parameters.bridgePreference,
           calls,
           feeToken: feeToken?.address,
           key,
           merchantUrl,
           requiredFunds: multichain ? requiredFunds : undefined,
+          useGasTank: parameters.useGasTank,
           webAuthn,
           ...(chainId ? { chain: { id: chainId } } : {}),
         })

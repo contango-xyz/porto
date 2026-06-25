@@ -1007,7 +1007,9 @@ export function from<
                 merchantUrl: UrlString.toAbsolute(
                   config.merchantUrl ?? capabilities?.merchantUrl,
                 ),
+                bridgePreference: capabilities?.bridgePreference,
                 requiredFunds: capabilities?.requiredFunds,
+                useGasTank: capabilities?.useGasTank,
               })
 
               return z.encode(Rpc.wallet_prepareCalls.Response, {
@@ -1087,7 +1089,9 @@ export function from<
                   config.merchantUrl ?? capabilities?.merchantUrl,
                 ),
                 permissionsId: capabilities?.permissions?.id,
+                bridgePreference: capabilities?.bridgePreference,
                 requiredFunds: capabilities?.requiredFunds,
+                useGasTank: capabilities?.useGasTank,
               })
 
               return { id } satisfies z.input<
