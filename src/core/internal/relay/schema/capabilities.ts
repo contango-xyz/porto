@@ -121,6 +121,11 @@ export namespace meta {
   export type Request = z.infer<typeof Request>
 }
 
+export namespace bridgePreference {
+  export const Request = z.union([z.literal('fastest'), z.literal('cheapest')])
+  export type Request = z.infer<typeof Request>
+}
+
 export namespace requiredFunds {
   export const Request = z.readonly(
     z.array(

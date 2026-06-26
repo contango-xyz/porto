@@ -660,11 +660,14 @@ export namespace wallet_getKeys {
 
 export namespace wallet_prepareCalls {
   export const Capabilities = z.object({
+    bridgePreference: z.optional(C.bridgePreference.Request),
     feeToken: z.optional(C.feeToken.Request),
     merchantUrl: z.optional(C.merchantUrl.Request),
     permissions: z.optional(C.permissions.Request),
     preCalls: z.optional(C.preCalls.Request),
     requiredFunds: z.optional(C.requiredFunds.Request),
+    /** Pay gas from the user's off-chain gas-tank balance instead of an on-chain fee token. */
+    useGasTank: z.optional(z.boolean()),
   })
   export type Capabilities = z.infer<typeof Capabilities>
 

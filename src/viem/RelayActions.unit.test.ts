@@ -32,7 +32,7 @@ const capabilitiesStub = {
 describe('prepareCalls', () => {
   // Drives prepareCalls just far enough to capture the wallet_prepareCalls params,
   // then aborts (no Relay needed). `params` is spread onto the prepareCalls input.
-  async function captureMeta(params: Record<string, unknown>) {
+  async function captureCapabilities(params: Record<string, unknown>) {
     let captured: any
     const client = createClient({
       chain: base,
@@ -69,16 +69,36 @@ describe('prepareCalls', () => {
       } as any),
     ).rejects.toThrow('__captured__')
 
-    return captured.capabilities.meta
+    return captured.capabilities
   }
 
-  test('behavior: forwards useGasTank into capabilities.meta', async () => {
-    const meta = await captureMeta({ useGasTank: true })
-    expect(meta.useGasTank).toBe(true)
-  })
-
-  test('behavior: omits useGasTank from capabilities.meta when not provided', async () => {
-    const meta = await captureMeta({})
-    expect(meta.useGasTank).toBeUndefined()
+  test.each([
+    {
+      expected: true,
+      input: { useGasTank: true },
+      name: 'forwards useGasTank into capabilities.meta',
+      select: (c: any) => c.meta.useGasTank,
+    },
+    {
+      expected: undefined,
+      input: {},
+      name: 'omits useGasTank from capabilities.meta when not provided',
+      select: (c: any) => c.meta.useGasTank,
+    },
+    {
+      expected: 'fastest',
+      input: { bridgePreference: 'fastest' },
+      name: 'forwards bridgePreference into capabilities',
+      select: (c: any) => c.bridgePreference,
+    },
+    {
+      expected: undefined,
+      input: {},
+      name: 'omits bridgePreference from capabilities when not provided',
+      select: (c: any) => c.bridgePreference,
+    },
+  ])('behavior: $name', async ({ input, select, expected }) => {
+    const capabilities = await captureCapabilities(input)
+    expect(select(capabilities)).toBe(expected)
   })
 })

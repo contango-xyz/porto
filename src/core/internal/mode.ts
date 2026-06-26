@@ -199,6 +199,14 @@ export type Mode = {
       internal: ActionsInternal
       /** Merchant RPC URL. */
       merchantUrl?: string | undefined
+      /** Preferred bridge selection when sourcing funds cross-chain. */
+      bridgePreference?:
+        | RpcSchema.wallet_prepareCalls.Capabilities['bridgePreference']
+        | undefined
+      /** Pay gas from the user's off-chain gas-tank balance. */
+      useGasTank?:
+        | RpcSchema.wallet_prepareCalls.Capabilities['useGasTank']
+        | undefined
       /** Required funds to execute the calls. */
       requiredFunds?:
         | RpcSchema.wallet_prepareCalls.Capabilities['requiredFunds']
@@ -278,6 +286,14 @@ export type Mode = {
       feeToken?: Token.Symbol | Address.Address | undefined
       /** Internal properties. */
       internal: ActionsInternal
+      /** Preferred bridge selection when sourcing funds cross-chain. */
+      bridgePreference?:
+        | RpcSchema.wallet_prepareCalls.Capabilities['bridgePreference']
+        | undefined
+      /** Pay gas from the user's off-chain gas-tank balance. */
+      useGasTank?:
+        | RpcSchema.wallet_prepareCalls.Capabilities['useGasTank']
+        | undefined
       /** Required funds to execute the calls. */
       requiredFunds?:
         | RpcSchema.wallet_prepareCalls.Capabilities['requiredFunds']
