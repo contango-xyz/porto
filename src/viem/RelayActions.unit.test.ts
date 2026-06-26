@@ -71,26 +71,34 @@ describe('prepareCalls', () => {
 
     return captured.capabilities
   }
-  const captureMeta = async (params: Record<string, unknown>) =>
-    (await captureCapabilities(params)).meta
 
-  test('behavior: forwards useGasTank into capabilities.meta', async () => {
-    const meta = await captureMeta({ useGasTank: true })
-    expect(meta.useGasTank).toBe(true)
-  })
-
-  test('behavior: omits useGasTank from capabilities.meta when not provided', async () => {
-    const meta = await captureMeta({})
-    expect(meta.useGasTank).toBeUndefined()
-  })
-
-  test('behavior: forwards bridgePreference into capabilities', async () => {
-    const capabilities = await captureCapabilities({ bridgePreference: 'fastest' })
-    expect(capabilities.bridgePreference).toBe('fastest')
-  })
-
-  test('behavior: omits bridgePreference from capabilities when not provided', async () => {
-    const capabilities = await captureCapabilities({})
-    expect(capabilities.bridgePreference).toBeUndefined()
+  test.each([
+    {
+      expected: true,
+      input: { useGasTank: true },
+      name: 'forwards useGasTank into capabilities.meta',
+      select: (c: any) => c.meta.useGasTank,
+    },
+    {
+      expected: undefined,
+      input: {},
+      name: 'omits useGasTank from capabilities.meta when not provided',
+      select: (c: any) => c.meta.useGasTank,
+    },
+    {
+      expected: 'fastest',
+      input: { bridgePreference: 'fastest' },
+      name: 'forwards bridgePreference into capabilities',
+      select: (c: any) => c.bridgePreference,
+    },
+    {
+      expected: undefined,
+      input: {},
+      name: 'omits bridgePreference from capabilities when not provided',
+      select: (c: any) => c.bridgePreference,
+    },
+  ])('behavior: $name', async ({ input, select, expected }) => {
+    const capabilities = await captureCapabilities(input)
+    expect(select(capabilities)).toBe(expected)
   })
 })
