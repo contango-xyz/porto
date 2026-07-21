@@ -987,7 +987,16 @@ export function from<
 
               const client = getClient(chainId)
 
-              const account = from ?? state.accounts[0]
+              // Resolve `from` against the connected accounts (matching `wallet_sendCalls` below)
+              // rather than `from ?? state.accounts[0]`. A bare `from` address would go through
+              // `Account.from("0x…")`, which yields `keys: undefined`, so the mode's key lookup
+              // fails with "cannot find authorized key to sign with" before any request. Looking the
+              // account up in the store preserves its keys.
+              const account = from
+                ? state.accounts.find((account) =>
+                    Address.isEqual(account.address, from),
+                  )
+                : state.accounts[0]
               if (!account) throw new ox_Provider.UnauthorizedError()
 
               if (chainId && chainId !== client.chain.id)

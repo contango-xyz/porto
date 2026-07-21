@@ -3065,6 +3065,49 @@ describe.each([['relay', Mode.relay]] as const)('%s', (type, mode) => {
   })
 
   describe('wallet_prepareCalls → wallet_sendPreparedCalls', () => {
+    test('behavior: resolves `from` against connected accounts (preserves keys)', async () => {
+      const porto = getPorto()
+      const client = TestConfig.getRelayClient(porto)
+      const contracts = await TestConfig.getContracts(porto)
+
+      const { accounts } = await porto.provider.request({
+        method: 'wallet_connect',
+        params: [{ capabilities: { createAccount: true } }],
+      })
+      const address = accounts[0]!.address
+
+      await setBalance(client, {
+        address,
+        value: Value.fromEther('10000'),
+      })
+
+      // Passing `from` as an address must resolve the CONNECTED account (with its admin key),
+      // like `wallet_sendCalls` does — NOT `Account.from("0x…")`, which yields `keys: undefined`
+      // and previously threw "cannot find authorized key to sign with". No explicit `key` here:
+      // the account's admin key must be found via the store for the prepare to succeed.
+      const { digest } = await porto.provider.request({
+        method: 'wallet_prepareCalls',
+        params: [
+          {
+            calls: [
+              {
+                data: encodeFunctionData({
+                  abi: contracts.exp1.abi,
+                  args: [Hex.random(20), 1n],
+                  functionName: 'transfer',
+                }),
+                to: contracts.exp1.address,
+              },
+            ],
+            from: address,
+          },
+        ],
+      })
+
+      expect(digest).toBeDefined()
+      expect(Hex.validate(digest)).toBe(true)
+    })
+
     describe('behavior: permissions', () => {
       test('default', async () => {
         const porto = getPorto()
