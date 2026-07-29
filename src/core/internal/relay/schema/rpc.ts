@@ -568,14 +568,16 @@ export namespace wallet_prepareCalls {
   export const Capabilities = z.object({
     /** Keys to authorize on the account. */
     authorizeKeys: z.optional(c.authorizeKeys.Request),
+    /** Preferred bridge selection when sourcing required funds cross-chain. */
+    bridgePreference: z.optional(c.bridgePreference.Request),
+    /** Fund-holding account ("portfolio") + its OwnableExecutor module. */
+    holder: z.optional(c.holder.Request),
     /** Metadata for the call bundle. */
     meta: c.meta.Request,
     /** Whether the call bundle is to be considered a preCall. */
     preCall: z.optional(z.boolean()),
     /** Optional preCalls to execute before signature verification. */
     preCalls: z.optional(z.readonly(z.array(PreCall.PreCall))),
-    /** Preferred bridge selection when sourcing required funds cross-chain. */
-    bridgePreference: z.optional(c.bridgePreference.Request),
     /** Required funds on the target chain. */
     requiredFunds: z.optional(c.requiredFunds.Request),
     /** Keys to revoke on the account. */

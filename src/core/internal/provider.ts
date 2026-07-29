@@ -995,8 +995,10 @@ export function from<
 
               const { digest, ...rest } = await getMode().actions.prepareCalls({
                 account: Account.from(account),
+                bridgePreference: capabilities?.bridgePreference,
                 calls,
                 feeToken: capabilities?.feeToken,
+                holder: capabilities?.holder,
                 internal: {
                   client,
                   config,
@@ -1007,7 +1009,6 @@ export function from<
                 merchantUrl: UrlString.toAbsolute(
                   config.merchantUrl ?? capabilities?.merchantUrl,
                 ),
-                bridgePreference: capabilities?.bridgePreference,
                 requiredFunds: capabilities?.requiredFunds,
                 useGasTank: capabilities?.useGasTank,
               })
@@ -1076,9 +1077,11 @@ export function from<
 
               const { id } = await getMode().actions.sendCalls({
                 account,
+                bridgePreference: capabilities?.bridgePreference,
                 calls,
                 chainId: client.chain.id,
                 feeToken: capabilities?.feeToken,
+                holder: capabilities?.holder,
                 internal: {
                   client,
                   config,
@@ -1089,7 +1092,6 @@ export function from<
                   config.merchantUrl ?? capabilities?.merchantUrl,
                 ),
                 permissionsId: capabilities?.permissions?.id,
-                bridgePreference: capabilities?.bridgePreference,
                 requiredFunds: capabilities?.requiredFunds,
                 useGasTank: capabilities?.useGasTank,
               })

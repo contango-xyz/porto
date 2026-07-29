@@ -197,6 +197,7 @@ export async function prepareCalls<
     chain = client.chain,
     feePayer,
     bridgePreference,
+    holder,
     merchantUrl,
     nonce,
     preCalls,
@@ -250,6 +251,7 @@ export async function prepareCalls<
     capabilities: {
       authorizeKeys,
       bridgePreference,
+      holder,
       meta: {
         feePayer,
         feeToken,
@@ -337,6 +339,8 @@ export namespace prepareCalls {
         | undefined
       /** Preferred bridge selection when sourcing funds cross-chain. */
       bridgePreference?: Capabilities.bridgePreference.Request | undefined
+      /** Fund-holding account ("portfolio") + its OwnableExecutor module. */
+      holder?: Capabilities.holder.Request | undefined
       /** Required funds to execute the calls. */
       requiredFunds?: Capabilities.requiredFunds.Request | undefined
       /** Additional keys to revoke from the account. */
