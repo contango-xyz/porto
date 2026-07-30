@@ -137,6 +137,17 @@ export namespace bridgePreference {
   export type Request = z.infer<typeof Request>
 }
 
+export namespace holder {
+  /** The fund-holding account (the "portfolio") distinct from the signing root,
+   * plus the `OwnableExecutor`-compatible module the relay queries via
+   * `isOwner(holder, root)` to confirm the root controls it. */
+  export const Request = z.object({
+    address: u.address(),
+    ownableExecutor: u.address(),
+  })
+  export type Request = z.infer<typeof Request>
+}
+
 export namespace requiredFunds {
   export const GetCapabilitiesResponse = z.object({
     supported: z.boolean(),

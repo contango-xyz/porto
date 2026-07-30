@@ -97,8 +97,28 @@ describe('prepareCalls', () => {
       name: 'omits bridgePreference from capabilities when not provided',
       select: (c: any) => c.bridgePreference,
     },
+    {
+      expected: {
+        address: '0x14f8cf3668166539b5f2fab90db72a30815e31ed',
+        ownableExecutor: '0xf82312e32871420ee55f26291521afb6f1e7705c',
+      },
+      input: {
+        holder: {
+          address: '0x14f8cf3668166539b5f2fab90db72a30815e31ed',
+          ownableExecutor: '0xf82312e32871420ee55f26291521afb6f1e7705c',
+        },
+      },
+      name: 'forwards holder into capabilities',
+      select: (c: any) => c.holder,
+    },
+    {
+      expected: undefined,
+      input: {},
+      name: 'omits holder from capabilities when not provided',
+      select: (c: any) => c.holder,
+    },
   ])('behavior: $name', async ({ input, select, expected }) => {
     const capabilities = await captureCapabilities(input)
-    expect(select(capabilities)).toBe(expected)
+    expect(select(capabilities)).toEqual(expected)
   })
 })

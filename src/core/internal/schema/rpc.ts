@@ -662,6 +662,8 @@ export namespace wallet_prepareCalls {
   export const Capabilities = z.object({
     bridgePreference: z.optional(C.bridgePreference.Request),
     feeToken: z.optional(C.feeToken.Request),
+    /** Fund-holding account ("portfolio") + its OwnableExecutor module. */
+    holder: z.optional(C.holder.Request),
     merchantUrl: z.optional(C.merchantUrl.Request),
     permissions: z.optional(C.permissions.Request),
     preCalls: z.optional(C.preCalls.Request),

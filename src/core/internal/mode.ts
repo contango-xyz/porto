@@ -207,6 +207,8 @@ export type Mode = {
       useGasTank?:
         | RpcSchema.wallet_prepareCalls.Capabilities['useGasTank']
         | undefined
+      /** Fund-holding account ("portfolio") + its OwnableExecutor module. */
+      holder?: RpcSchema.wallet_prepareCalls.Capabilities['holder'] | undefined
       /** Required funds to execute the calls. */
       requiredFunds?:
         | RpcSchema.wallet_prepareCalls.Capabilities['requiredFunds']
@@ -294,6 +296,8 @@ export type Mode = {
       useGasTank?:
         | RpcSchema.wallet_prepareCalls.Capabilities['useGasTank']
         | undefined
+      /** Fund-holding account ("portfolio") + its OwnableExecutor module. */
+      holder?: RpcSchema.wallet_prepareCalls.Capabilities['holder'] | undefined
       /** Required funds to execute the calls. */
       requiredFunds?:
         | RpcSchema.wallet_prepareCalls.Capabilities['requiredFunds']
